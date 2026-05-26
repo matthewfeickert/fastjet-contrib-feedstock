@@ -1,11 +1,10 @@
 context:
-  name: "fastjet-contrib"
   version: "1.102"
 
 recipe:
   # Have top level name be unique from any outputs
   # c.f. https://github.com/conda-forge/conda-forge.github.io/blob/abfc33db28c35e9a8f6b719d0021768f0d5d06be/docs/maintainer/knowledge_base.md?plain=1#L1749
-  name: ${{ name }}-split
+  name: fastjet-contrib-split
   version: ${{ version }}
 
 source:
@@ -22,7 +21,7 @@ build:
 
 outputs:
   - package:
-      name: ${{ name }}
+      name: fastjet-contrib
 
     build:
       script:
@@ -210,7 +209,7 @@ outputs:
 
 
   - package:
-      name: ${{ name }}-split
+      name: fastjet-contrib-split
 
     build:
       script:
