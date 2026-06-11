@@ -1,5 +1,5 @@
 context:
-  version: "1.102"
+  version: "1.103"
 
 recipe:
   # Have top level name be unique from any outputs
@@ -9,7 +9,7 @@ recipe:
 
 source:
   url: https://fastjet.hepforge.org/contrib/downloads/fjcontrib-${{ version }}.tar.gz
-  sha256: 971bdd6260a0755acadcdd04c2e22aece81625038f8aab869b8c472ed2091b7e
+  sha256: 375c1fcc0bb29dd327f24013d9edfe93495d29cb0b87a016819088ebd9ccf72f
   patches:
     - 0001-port-the-CMS-additions.patch
     - 0002-drop-as-needed-flag-to-avoid-link-errors-on-missing-.patch
