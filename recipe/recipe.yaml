@@ -1,5 +1,5 @@
 context:
-  version: "1.102"
+  version: "1.103"
 
 recipe:
   # Have top level name be unique from any outputs
@@ -8,8 +8,8 @@ recipe:
   version: ${{ version }}
 
 source:
-  url: https://fastjet.hepforge.org/contrib/downloads/fjcontrib-${{ version }}.tar.gz
-  sha256: 971bdd6260a0755acadcdd04c2e22aece81625038f8aab869b8c472ed2091b7e
+  url: https://fastjet.fr/contrib/downloads/fjcontrib-${{ version }}.tar.gz
+  sha256: 375c1fcc0bb29dd327f24013d9edfe93495d29cb0b87a016819088ebd9ccf72f
   patches:
     - 0001-port-the-CMS-additions.patch
     - 0002-drop-as-needed-flag-to-avoid-link-errors-on-missing-.patch
@@ -36,10 +36,10 @@ outputs:
 
     requirements:
       run_exports:
-        - ${{ pin_subpackage('fastjet-contrib', upper_bound='x.x') }}
+        - ${{ pin_subpackage("fastjet-contrib", upper_bound="x.x") }}
       build:
-        - ${{ stdlib('c') }}
-        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - cmake
         - if: unix
           then: make
@@ -52,95 +52,18 @@ outputs:
 
     tests:
       - package_contents:
+          strict: true
           files:
             - if: win
               then: Library/lib/cmake/fastjetcontrib/fastjetcontrib*.cmake
               else: lib/cmake/fastjetcontrib/fastjetcontrib*.cmake
           lib:
-            exists:
-              - if: win
-                then: fastjetcontribfragile.lib
-                else: fastjetcontribfragile
-            not_exists:
-              - if: win
-                then:
-                  - CMPPlugin.lib
-                  - Centauro.lib
-                  - ClusteringVetoPlugin.lib
-                  - ConstituentSubtractor.lib
-                  - EnergyCorrelator.lib
-                  - FlavorCone.lib
-                  - GHSAlgo.lib
-                  - GenericSubtractor.lib
-                  - IFNPlugin.lib
-                  - JetCleanser.lib
-                  - JetFFMoments.lib
-                  - JetsWithoutJets.lib
-                  - LundPlane.lib
-                  - Nsubjettiness.lib
-                  - QCDAwarePlugin.lib
-                  - RecursiveTools.lib
-                  - SDFPlugin.lib
-                  - ScJet.lib
-                  - SignalFreeBackgroundEstimator.lib
-                  - SoftKiller.lib
-                  - SubjetCounting.lib
-                  - ValenciaPlugin.lib
-                  - VariableR.lib
-                else:
-                  - CMPPlugin
-                  - Centauro
-                  - ClusteringVetoPlugin
-                  - ConstituentSubtractor
-                  - EnergyCorrelator
-                  - FlavorCone
-                  - GHSAlgo
-                  - GenericSubtractor
-                  - IFNPlugin
-                  - JetCleanser
-                  - JetFFMoments
-                  - JetsWithoutJets
-                  - LundPlane
-                  - Nsubjettiness
-                  - QCDAwarePlugin
-                  - RecursiveTools
-                  - SDFPlugin
-                  - ScJet
-                  - SignalFreeBackgroundEstimator
-                  - SoftKiller
-                  - SubjetCounting
-                  - ValenciaPlugin
-                  - VariableR
+            - if: win
+              then: fastjetcontribfragile.lib
+              else: fastjetcontribfragile
           bin:
-            exists:
-              - if: win
-                then: fastjetcontribfragile.dll
-            not_exists:
-              - if: win
-                then:
-                  - CMPPlugin.dll
-                  - Centauro.dll
-                  - ClusteringVetoPlugin.dll
-                  - ConstituentSubtractor.dll
-                  - EnergyCorrelator.dll
-                  - FlavorCone.dll
-                  - GHSAlgo.dll
-                  - GenericSubtractor.dll
-                  - IFNPlugin.dll
-                  - JetCleanser.dll
-                  - JetFFMoments.dll
-                  - JetsWithoutJets.dll
-                  - LundPlane.dll
-                  - Nsubjettiness.dll
-                  - QCDAwarePlugin.dll
-                  - RecursiveTools.dll
-                  - SDFPlugin.dll
-                  - ScJet.dll
-                  - SignalFreeBackgroundEstimator.dll
-                  - SoftKiller.dll
-                  - SubjetCounting.dll
-                  - ValenciaPlugin.dll
-                  - VariableR.dll
+            - if: win
+              then: fastjetcontribfragile.dll
           include:
             - fastjet/contrib/*.h
             - fastjet/contrib/AxesDefinition.hh
@@ -149,6 +72,7 @@ outputs:
             - fastjet/contrib/Centauro.hh
             - fastjet/contrib/ClusteringVetoPlugin.hh
             - fastjet/contrib/ConstituentSubtractor.hh
+            - fastjet/contrib/DISGenkt.hh
             - fastjet/contrib/DistanceMeasure.hh
             - fastjet/contrib/EnergyCorrelator.hh
             - fastjet/contrib/EventStorage.hh
@@ -201,7 +125,7 @@ outputs:
           - script: run_test_shared.sh
             requirements:
               run:
-                - ${{ compiler('cxx') }}
+                - ${{ compiler("cxx") }}
                 - curl
                 - tar
                 - grep
@@ -223,9 +147,11 @@ outputs:
         - cmake --install build
 
     requirements:
+      run_exports:
+        - ${{ pin_subpackage("fastjet-contrib-split", upper_bound="x.x") }}
       build:
-        - ${{ stdlib('c') }}
-        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - cmake
         - if: unix
           then: make
@@ -238,95 +164,90 @@ outputs:
 
     tests:
       - package_contents:
+          strict: true
           files:
             - if: win
               then: Library/lib/cmake/fastjetcontrib/fastjetcontrib*.cmake
               else: lib/cmake/fastjetcontrib/fastjetcontrib*.cmake
           lib:
-            exists:
-              - if: win
-                then:
-                  - CMPPlugin.lib
-                  - Centauro.lib
-                  - ClusteringVetoPlugin.lib
-                  - ConstituentSubtractor.lib
-                  - EnergyCorrelator.lib
-                  - FlavorCone.lib
-                  - GHSAlgo.lib
-                  - GenericSubtractor.lib
-                  - IFNPlugin.lib
-                  - JetCleanser.lib
-                  - JetFFMoments.lib
-                  - JetsWithoutJets.lib
-                  - LundPlane.lib
-                  - Nsubjettiness.lib
-                  - QCDAwarePlugin.lib
-                  - RecursiveTools.lib
-                  - SDFPlugin.lib
-                  - ScJet.lib
-                  - SignalFreeBackgroundEstimator.lib
-                  - SoftKiller.lib
-                  - SubjetCounting.lib
-                  - ValenciaPlugin.lib
-                  - VariableR.lib
-                else:
-                  - CMPPlugin
-                  - Centauro
-                  - ClusteringVetoPlugin
-                  - ConstituentSubtractor
-                  - EnergyCorrelator
-                  - FlavorCone
-                  - GHSAlgo
-                  - GenericSubtractor
-                  - IFNPlugin
-                  - JetCleanser
-                  - JetFFMoments
-                  - JetsWithoutJets
-                  - LundPlane
-                  - Nsubjettiness
-                  - QCDAwarePlugin
-                  - RecursiveTools
-                  - SDFPlugin
-                  - ScJet
-                  - SignalFreeBackgroundEstimator
-                  - SoftKiller
-                  - SubjetCounting
-                  - ValenciaPlugin
-                  - VariableR
-            not_exists:
-              - if: win
-                then: fastjetcontribfragile.lib
-                else: fastjetcontribfragile
+            - if: win
+              then:
+                - CMPPlugin.lib
+                - Centauro.lib
+                - ClusteringVetoPlugin.lib
+                - ConstituentSubtractor.lib
+                - DISGenkt.lib
+                - EnergyCorrelator.lib
+                - FlavorCone.lib
+                - GHSAlgo.lib
+                - GenericSubtractor.lib
+                - IFNPlugin.lib
+                - JetCleanser.lib
+                - JetFFMoments.lib
+                - JetsWithoutJets.lib
+                - LundPlane.lib
+                - Nsubjettiness.lib
+                - QCDAwarePlugin.lib
+                - RecursiveTools.lib
+                - SDFPlugin.lib
+                - ScJet.lib
+                - SignalFreeBackgroundEstimator.lib
+                - SoftKiller.lib
+                - SubjetCounting.lib
+                - ValenciaPlugin.lib
+                - VariableR.lib
+              else:
+                - CMPPlugin
+                - Centauro
+                - ClusteringVetoPlugin
+                - ConstituentSubtractor
+                - DISGenkt
+                - EnergyCorrelator
+                - FlavorCone
+                - GHSAlgo
+                - GenericSubtractor
+                - IFNPlugin
+                - JetCleanser
+                - JetFFMoments
+                - JetsWithoutJets
+                - LundPlane
+                - Nsubjettiness
+                - QCDAwarePlugin
+                - RecursiveTools
+                - SDFPlugin
+                - ScJet
+                - SignalFreeBackgroundEstimator
+                - SoftKiller
+                - SubjetCounting
+                - ValenciaPlugin
+                - VariableR
           bin:
-            exists:
-              - if: win
-                then:
-                  - CMPPlugin.dll
-                  - Centauro.dll
-                  - ClusteringVetoPlugin.dll
-                  - ConstituentSubtractor.dll
-                  - EnergyCorrelator.dll
-                  - FlavorCone.dll
-                  - GHSAlgo.dll
-                  - GenericSubtractor.dll
-                  - IFNPlugin.dll
-                  - JetCleanser.dll
-                  - JetFFMoments.dll
-                  - JetsWithoutJets.dll
-                  - LundPlane.dll
-                  - Nsubjettiness.dll
-                  - QCDAwarePlugin.dll
-                  - RecursiveTools.dll
-                  - SDFPlugin.dll
-                  - ScJet.dll
-                  - SignalFreeBackgroundEstimator.dll
-                  - SoftKiller.dll
-                  - SubjetCounting.dll
-                  - ValenciaPlugin.dll
-                  - VariableR.dll
-            not_exists:
-              - if: win
-                then: fastjetcontribfragile.dll
+            - if: win
+              then:
+                - CMPPlugin.dll
+                - Centauro.dll
+                - ClusteringVetoPlugin.dll
+                - ConstituentSubtractor.dll
+                - DISGenkt.dll
+                - EnergyCorrelator.dll
+                - FlavorCone.dll
+                - GHSAlgo.dll
+                - GenericSubtractor.dll
+                - IFNPlugin.dll
+                - JetCleanser.dll
+                - JetFFMoments.dll
+                - JetsWithoutJets.dll
+                - LundPlane.dll
+                - Nsubjettiness.dll
+                - QCDAwarePlugin.dll
+                - RecursiveTools.dll
+                - SDFPlugin.dll
+                - ScJet.dll
+                - SignalFreeBackgroundEstimator.dll
+                - SoftKiller.dll
+                - SubjetCounting.dll
+                - ValenciaPlugin.dll
+                - VariableR.dll
           include:
             - fastjet/contrib/*.h
             - fastjet/contrib/AxesDefinition.hh
@@ -335,6 +256,7 @@ outputs:
             - fastjet/contrib/Centauro.hh
             - fastjet/contrib/ClusteringVetoPlugin.hh
             - fastjet/contrib/ConstituentSubtractor.hh
+            - fastjet/contrib/DISGenkt.hh
             - fastjet/contrib/DistanceMeasure.hh
             - fastjet/contrib/EnergyCorrelator.hh
             - fastjet/contrib/EventStorage.hh
@@ -387,7 +309,7 @@ outputs:
           - script: run_test_static.sh
             requirements:
               run:
-                - ${{ compiler('cxx') }}
+                - ${{ compiler("cxx") }}
                 - curl
                 - tar
                 - grep
