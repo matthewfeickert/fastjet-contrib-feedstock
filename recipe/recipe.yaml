@@ -36,10 +36,10 @@ outputs:
 
     requirements:
       run_exports:
-        - ${{ pin_subpackage('fastjet-contrib', upper_bound='x.x') }}
+        - ${{ pin_subpackage("fastjet-contrib", upper_bound="x.x") }}
       build:
-        - ${{ stdlib('c') }}
-        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - cmake
         - if: unix
           then: make
@@ -201,7 +201,7 @@ outputs:
           - script: run_test_shared.sh
             requirements:
               run:
-                - ${{ compiler('cxx') }}
+                - ${{ compiler("cxx") }}
                 - curl
                 - tar
                 - grep
@@ -223,9 +223,11 @@ outputs:
         - cmake --install build
 
     requirements:
+      run_exports:
+        - ${{ pin_subpackage("fastjet-contrib-split", upper_bound="x.x") }}
       build:
-        - ${{ stdlib('c') }}
-        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - ${{ compiler("cxx") }}
         - cmake
         - if: unix
           then: make
@@ -387,7 +389,7 @@ outputs:
           - script: run_test_static.sh
             requirements:
               run:
-                - ${{ compiler('cxx') }}
+                - ${{ compiler("cxx") }}
                 - curl
                 - tar
                 - grep
