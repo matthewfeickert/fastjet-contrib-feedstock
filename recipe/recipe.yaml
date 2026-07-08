@@ -74,6 +74,7 @@ outputs:
             - fastjet/contrib/ConstituentSubtractor.hh
             - fastjet/contrib/DISGenkt.hh
             - fastjet/contrib/DistanceMeasure.hh
+            - fastjet/contrib/DynamicR.hh
             - fastjet/contrib/EnergyCorrelator.hh
             - fastjet/contrib/EventStorage.hh
             - fastjet/contrib/ExtraRecombiners.hh
@@ -177,6 +178,7 @@ outputs:
                 - ClusteringVetoPlugin.lib
                 - ConstituentSubtractor.lib
                 - DISGenkt.lib
+                - DynamicR.lib
                 - EnergyCorrelator.lib
                 - FlavorCone.lib
                 - GHSAlgo.lib
@@ -202,6 +204,7 @@ outputs:
                 - ClusteringVetoPlugin
                 - ConstituentSubtractor
                 - DISGenkt
+                - DynamicR
                 - EnergyCorrelator
                 - FlavorCone
                 - GHSAlgo
@@ -229,6 +232,7 @@ outputs:
                 - ClusteringVetoPlugin.dll
                 - ConstituentSubtractor.dll
                 - DISGenkt.dll
+                - DynamicR.dll
                 - EnergyCorrelator.dll
                 - FlavorCone.dll
                 - GHSAlgo.dll
@@ -258,6 +262,7 @@ outputs:
             - fastjet/contrib/ConstituentSubtractor.hh
             - fastjet/contrib/DISGenkt.hh
             - fastjet/contrib/DistanceMeasure.hh
+            - fastjet/contrib/DynamicR.hh
             - fastjet/contrib/EnergyCorrelator.hh
             - fastjet/contrib/EventStorage.hh
             - fastjet/contrib/ExtraRecombiners.hh
