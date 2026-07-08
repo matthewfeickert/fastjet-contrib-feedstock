@@ -17,7 +17,7 @@ source:
     - 0004-required-source-changes-for-windows-build.patch
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -36,7 +36,7 @@ outputs:
 
     requirements:
       run_exports:
-        - ${{ pin_subpackage("fastjet-contrib", upper_bound="x.x") }}
+        - ${{ pin_subpackage("fastjet-contrib", upper_bound="x") }}
       build:
         - ${{ stdlib("c") }}
         - ${{ compiler("cxx") }}
@@ -148,7 +148,7 @@ outputs:
 
     requirements:
       run_exports:
-        - ${{ pin_subpackage("fastjet-contrib-split", upper_bound="x.x") }}
+        - ${{ pin_subpackage("fastjet-contrib-split", upper_bound="x") }}
       build:
         - ${{ stdlib("c") }}
         - ${{ compiler("cxx") }}
